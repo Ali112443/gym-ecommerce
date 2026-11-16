@@ -1,5 +1,6 @@
 .page-content {
-  min-height: calc(100vh - 64px);
+  flex: 1;
+  min-width: 0;
 }
 :host {
   display: flex;
@@ -7,4 +8,6 @@
   min-height: 100vh;
 }
 
-main { flex: 1; }
+main {
+  min-width: 0;
+}
