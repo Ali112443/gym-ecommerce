@@ -1,0 +1,133 @@
+/* ========== Colors ========== */
+:root {
+  --petrol-900: #0a2e38;
+  --petrol-700: #0f4c5c;
+  --petrol-500: #2a7f8e;
+  --petrol-300: #6fbdc4;
+  --petrol-100: #d5eef0;
+
+  --black: #0b0f10;
+  --white: #ffffff;
+  --gray-100: #f3f5f6;
+  --gray-300: #d9dfe2;
+  --gray-500: #6b7780;
+  --gray-700: #2b363b;
+
+  --radius: 12px;
+  --container: 1200px;
+
+  /* Light (default) */
+  --bg: var(--white);
+  --surface: var(--gray-100);
+  --text: var(--black);
+  --text-muted: var(--gray-500);
+  --border: var(--gray-300);
+  --primary: var(--petrol-700);
+  --primary-hover: var(--petrol-900);
+  --on-primary: var(--white);
+  --petrol-section: var(--petrol-700);
+  --header-bg: var(--black);
+  --header-text: #f5f7f8;
+  --header-border: var(--gray-700);
+
+  --footer-bg: #07242c;
+  --footer-text: rgba(245, 247, 248, 0.84);
+  --footer-muted: rgba(245, 247, 248, 0.52);
+  --footer-border: rgba(245, 247, 248, 0.14);
+}
+
+/* Dark: نفس الـ selector اللي الـ ThemeService بتاعك بيستخدمه */
+html.dark {
+  --bg: var(--black);
+  --surface: #131a1d;
+  --text: #f5f7f8;
+  --text-muted: #9aa5ab;
+  --border: var(--gray-700);
+  --primary: var(--petrol-300);
+  --primary-hover: var(--petrol-100);
+  --on-primary: var(--black);
+  --petrol-section: var(--petrol-900);
+  --header-bg: var(--black);
+  --header-text: #f5f7f8;
+  --header-border: var(--gray-700);
+
+  --footer-bg: #07242c;
+  --footer-text: rgba(245, 247, 248, 0.84);
+  --footer-muted: rgba(245, 247, 248, 0.52);
+  --footer-border: rgba(245, 247, 248, 0.14);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  width: min(100% - 3rem, var(--container));
+  margin-inline: auto;
+}
+
+.section-light {
+  background: var(--bg);
+  color: var(--text);
+}
+.section-gray {
+  background: var(--surface);
+  color: var(--text);
+}
+.section-dark {
+  background: var(--black);
+  color: var(--white);
+}
+.section-petrol {
+  background: var(--petrol-section);
+  color: var(--white);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: min(100% - 2rem, var(--container));
+  }
+}

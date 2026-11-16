@@ -1,0 +1,332 @@
+:host {
+  display: block;
+}
+.page-wrap {
+  width: min(100% - 3rem, 1200px);
+  min-height: 65vh;
+  margin: 0 auto;
+  padding: 2.5rem 0 5rem;
+  color: var(--text);
+}
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 2.25rem;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+}
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+}
+.breadcrumbs a:hover {
+  color: var(--primary);
+}
+.page-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.eyebrow {
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+.page-title-row h1 {
+  margin: 0.45rem 0 0;
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  font-size: clamp(3rem, 7vw, 5rem);
+  font-weight: 400;
+  line-height: 0.95;
+}
+.page-title-row h1 span {
+  color: var(--primary);
+}
+.text-link {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+.text-link:hover {
+  color: var(--primary);
+}
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+  align-items: start;
+  gap: 3rem;
+}
+.cart-labels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px 110px;
+  gap: 1rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.cart-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 100px 110px;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-row > img {
+  width: 92px;
+  height: 112px;
+  border-radius: 4px;
+  background: var(--surface);
+  object-fit: cover;
+}
+.cart-product {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.cart-product a {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
+}
+.cart-product a:hover {
+  color: var(--primary);
+}
+.cart-product span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+.cart-product strong {
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+}
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 92px;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.quantity-control button {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.quantity-control button:hover {
+  background: var(--surface);
+  color: var(--primary);
+}
+.quantity-control span {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.line-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.remove-item {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.remove-item:hover {
+  color: #d64f58;
+}
+.order-summary {
+  position: sticky;
+  top: 110px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+}
+.order-summary > .eyebrow {
+  display: block;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.summary-line,
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+.summary-line + .summary-line {
+  padding-top: 0;
+}
+.summary-total {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+.summary-total strong {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+.coupon {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+.coupon input {
+  min-width: 0;
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.78rem;
+}
+.coupon button {
+  padding: 0 0.9rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--petrol-700);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+.coupon button:hover {
+  background: var(--petrol-900);
+}
+.coupon-message {
+  display: block;
+  margin: 0.25rem 0 0.5rem;
+  color: var(--primary);
+  font-size: 0.72rem;
+}
+.summary-line.discount {
+  color: var(--primary);
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 3px;
+  background: var(--petrol-300);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+.button:hover {
+  background: var(--petrol-100);
+}
+.secure-note {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+.empty-state {
+  display: grid;
+  min-height: 330px;
+  justify-items: center;
+  align-content: center;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--surface);
+  text-align: center;
+}
+.empty-icon {
+  color: var(--primary);
+  font-size: 2.8rem;
+}
+.empty-state h2 {
+  margin: 0.5rem 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+.empty-state p {
+  margin: 0 0 1.25rem;
+  color: var(--text-muted);
+}
+.empty-state .button {
+  width: auto;
+}
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .order-summary {
+    position: static;
+  }
+}
+@media (max-width: 620px) {
+  .page-wrap {
+    width: min(100% - 2rem, 1200px);
+    padding-top: 1.75rem;
+  }
+  .page-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .cart-labels {
+    display: none;
+  }
+  .cart-row {
+    grid-template-columns: 76px minmax(0, 1fr) auto;
+    gap: 0.75rem;
+  }
+  .cart-row > img {
+    width: 76px;
+    height: 96px;
+    grid-row: span 2;
+  }
+  .cart-product {
+    align-self: end;
+  }
+  .quantity-control {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .line-total {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+}

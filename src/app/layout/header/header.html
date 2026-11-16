@@ -1,0 +1,53 @@
+<mat-toolbar class="site-toolbar">
+  <div class="toolbar-content">
+    <a routerLink="/" class="store-name" aria-label="Spider House home">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span class="brand-copy">SPIDER<span>HOUSE</span><small>TRAINING EQUIPMENT</small></span>
+    </a>
+    <nav class="primary-nav" aria-label="Main navigation">
+      <a
+        routerLink="/products"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Shop</a
+      >
+      <a routerLink="/wishlist" routerLinkActive="active">Wishlist</a>
+      <a routerLink="/orders" routerLinkActive="active">Orders</a>
+    </nav>
+    <div class="header-actions">
+      <a
+        class="cart-link"
+        routerLink="/cart"
+        aria-label="Shopping bag, {{ store.cartCount() }} items"
+      >
+        <mat-icon aria-hidden="true">shopping_bag</mat-icon><span>Bag</span>
+        @if (store.cartCount()) {
+          <b class="cart-count">{{ store.cartCount() }}</b>
+        }
+      </a>
+      <button
+        class="theme-button"
+        (click)="themeService.toggleTheme()"
+        type="button"
+        [attr.aria-label]="
+          themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'
+        "
+        title="Toggle color theme"
+      >
+        @if (themeService.isDarkMode()) {
+          <mat-icon>light_mode</mat-icon>
+        } @else {
+          <mat-icon>dark_mode</mat-icon>
+        }
+      </button>
+      <div class="account-actions">
+        <a class="sign-in-button" routerLink="/profile">Account</a>
+        @if (!store.isLoggedIn()) {
+          <a class="sign-up-button" routerLink="/sign-in">Sign in</a>
+        } @else {
+          <button class="sign-up-button" type="button" (click)="store.logout()">Sign out</button>
+        }
+      </div>
+    </div>
+  </div>
+</mat-toolbar>

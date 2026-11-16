@@ -1,0 +1,43 @@
+<div class="page-wrap">
+  <div class="breadcrumbs"><a routerLink="/">HOME</a><span>/</span>WISHLIST</div>
+  <div class="page-title-row">
+    <div>
+      <div class="eyebrow">SAVED FOR YOUR NEXT SESSION</div>
+      <h1>
+        YOUR WISHLIST <span>({{ store.wishlist().length }})</span>
+      </h1>
+    </div>
+  </div>
+  @if (store.wishlist().length) {
+    <div class="product-grid wishlist-grid">
+      @for (product of saved(); track product.id) {
+        <article class="product-card">
+          <div class="product-image">
+            <a [routerLink]="['/product', product.id]"
+              ><img [src]="product.image" [alt]="product.name" /></a
+            ><button class="heart-button is-favorite" (click)="store.toggleWishlist(product.id)">
+              ♥</button
+            ><button class="quick-add" (click)="store.addToCart(product)">
+              ADD TO BAG <span>＋</span>
+            </button>
+          </div>
+          <div class="product-meta">
+            <span>{{ product.category }}</span><span class="rating">★ {{ product.rating }}</span>
+          </div>
+          <div class="product-name-price">
+            <a [routerLink]="['/product', product.id]">{{ product.name }}</a><strong
+              >EGP {{ product.price | number }}</strong
+            >
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <span class="empty-icon">♡</span>
+      <h2>Nothing saved. Yet.</h2>
+      <p>Keep your favorites close for the next time you gear up.</p>
+      <a routerLink="/" class="button button-green">EXPLORE THE COLLECTION ↙</a>
+    </div>
+  }
+</div>

@@ -1,0 +1,46 @@
+<div class="page-wrap orders-page">
+  <div class="breadcrumbs"><a routerLink="/">HOME</a><span>/</span>MY ORDERS</div>
+  <div class="page-title-row">
+    <div>
+      <div class="eyebrow">YOUR TRAINING JOURNEY</div>
+      <h1>
+        MY ORDERS <span>({{ store.orders().length }})</span>
+      </h1>
+    </div>
+    <button class="account-link logout-link" (click)="store.logout()">SIGN OUT</button>
+  </div>
+  @if (store.orders().length) {
+    <div class="orders-list">
+      @for (order of store.orders(); track order.id) {
+        <article class="order-card">
+          <div class="order-card-top">
+            <div>
+              <small>ORDER NUMBER</small><strong>{{ order.id }}</strong>
+            </div>
+            <div>
+              <small>PLACED ON</small><strong>{{ order.date }}</strong>
+            </div>
+            <div>
+              <small>ITEMS</small><strong>{{ order.items }} product(s)</strong>
+            </div>
+            <div>
+              <small>ORDER TOTAL</small><strong>EGP {{ order.total | number }}</strong>
+            </div>
+            <span class="order-status"><i></i>{{ order.status }}</span>
+          </div>
+          <div class="order-progress">
+            <span class="complete"><i>✓</i>Order placed</span><b></b><span><i>02</i>Preparing</span
+            ><b></b><span><i>03</i>On its way</span><b></b><span><i>04</i>Delivered</span>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <span class="empty-icon">↗</span>
+      <h2>Your next order starts here.</h2>
+      <p>Orders will show up here as soon as you gear up.</p>
+      <a routerLink="/" class="button button-green">SHOP THE COLLECTION ↙</a>
+    </div>
+  }
+</div>

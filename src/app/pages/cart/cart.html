@@ -1,0 +1,78 @@
+<div class="page-wrap cart-page">
+  <div class="breadcrumbs"><a routerLink="/">HOME</a><span>/</span>YOUR BAG</div>
+  <div class="page-title-row">
+    <div>
+      <div class="eyebrow">READY WHEN YOU ARE</div>
+      <h1>
+        YOUR BAG <span>({{ store.cartCount() }})</span>
+      </h1>
+    </div>
+    <a routerLink="/" class="text-link">CONTINUE SHOPPING ↙</a>
+  </div>
+  @if (store.cart().length) {
+    <div class="cart-layout">
+      <div class="cart-items">
+        <div class="cart-labels">
+          <span>PRODUCT</span><span>QUANTITY</span><span>SUBTOTAL</span>
+        </div>
+        @for (item of store.cart(); track item.product.id + item.size + item.color) {
+          <article class="cart-row">
+            <img [src]="item.product.image" [alt]="item.product.name" />
+            <div class="cart-product">
+              <a [routerLink]="['/product', item.product.id]">{{ item.product.name }}</a><span
+                >{{ item.color }} / {{ item.size }}</span
+              ><strong>EGP {{ item.product.price | number }}</strong>
+            </div>
+            <div class="quantity-control">
+              <button (click)="quantity(item, -1)">−</button><span>{{ item.quantity }}</span
+              ><button (click)="quantity(item, 1)">＋</button>
+            </div>
+            <div class="line-total">
+              EGP {{ item.product.price * item.quantity | number
+              }}<button class="remove-item" (click)="remove(item)">REMOVE</button>
+            </div>
+          </article>
+        }
+      </div>
+      <aside class="order-summary">
+        <div class="eyebrow">ORDER SUMMARY</div>
+        <div class="summary-line">
+          <span>Subtotal</span><span>EGP {{ store.subtotal() | number }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Shipping</span
+          ><span>{{ store.subtotal() > 2000 ? 'FREE' : 'Calculated at checkout' }}</span>
+        </div>
+        <div class="coupon">
+          <input
+            placeholder="Discount code"
+            [value]="couponCode"
+            (input)="couponCode = $any($event.target).value"
+          /><button (click)="applyCoupon()">APPLY</button>
+        </div>
+        @if (couponMessage) {
+          <small class="coupon-message">{{ couponMessage }}</small>
+        }
+        @if (store.discount()) {
+          <div class="summary-line discount">
+            <span>IRON15 discount</span><span>− EGP {{ store.discount() | number }}</span>
+          </div>
+        }
+        <div class="summary-total">
+          <span>TOTAL</span><strong>EGP {{ store.total() | number }}</strong>
+        </div>
+        <a routerLink="/checkout" class="button button-green full-button"
+          >PROCEED TO CHECKOUT <span>↙</span></a
+        >
+        <div class="secure-note">⌑ SECURE CHECKOUT · ALL MAJOR CARDS</div>
+      </aside>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <span class="empty-icon">♧</span>
+      <h2>Your bag is taking a rest.</h2>
+      <p>Find something that gets you moving.</p>
+      <a routerLink="/" class="button button-green">SHOP THE COLLECTION ↙</a>
+    </div>
+  }
+</div>

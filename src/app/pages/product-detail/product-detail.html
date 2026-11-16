@@ -1,0 +1,79 @@
+<main class="product-page">
+  <div class="breadcrumbs">
+    <a routerLink="/">HOME</a><span>/</span><a routerLink="/products">SHOP</a><span>/</span>
+    PRODUCT
+  </div>
+
+  @if (product(); as item) {
+    <section class="product-layout">
+      <div class="product-photo">
+        <img [src]="item.image" [alt]="item.name" />
+        @if (item.badge) {
+          <span class="product-badge">{{ item.badge }}</span>
+        }
+      </div>
+      <div class="product-info">
+        <span class="eyebrow">{{ item.category }} / SPIDER HOUSE</span>
+        <h1>{{ item.name }}</h1>
+        <div class="rating">
+          ★ {{ item.rating }} <span>({{ item.reviews }} reviews)</span>
+        </div>
+        <div class="price-row">
+          <strong>EGP {{ item.price | number }}</strong>
+          @if (item.oldPrice) {
+            <del>EGP {{ item.oldPrice | number }}</del>
+          }
+        </div>
+        <p class="description">{{ item.description }}</p>
+
+        <div class="option-group">
+          <div class="option-heading">
+            <strong>Color</strong><span>{{ selectedColor() || item.colors[0] }}</span>
+          </div>
+          <div class="option-list">
+            @for (color of item.colors; track color) {
+              <button
+                type="button"
+                [class.selected]="(selectedColor() || item.colors[0]) === color"
+                (click)="selectedColor.set(color)"
+              >
+                {{ color }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-heading">
+            <strong>Size</strong><span>{{ selectedSize() || item.sizes[0] }}</span>
+          </div>
+          <div class="option-list">
+            @for (size of item.sizes; track size) {
+              <button
+                type="button"
+                [class.selected]="(selectedSize() || item.sizes[0]) === size"
+                (click)="selectedSize.set(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <button class="add-button" type="button" (click)="addToBag()">
+          {{ added() ? 'ADDED TO YOUR BAG' : 'ADD TO BAG' }} <span>＋</span>
+        </button>
+        <button class="wishlist-button" type="button" (click)="store.toggleWishlist(item.id)">
+          {{ store.wishlist().includes(item.id) ? '♥ REMOVE FROM WISHLIST' : '♡ SAVE TO WISHLIST' }}
+        </button>
+        <p class="shipping-note">Complimentary shipping on orders over EGP 2,000.</p>
+      </div>
+    </section>
+  } @else {
+    <section class="not-found">
+      <span class="eyebrow">PRODUCT NOT FOUND</span>
+      <h1>This piece is out of our collection.</h1>
+      <a routerLink="/products">BACK TO SHOP <span>↙</span></a>
+    </section>
+  }
+</main>

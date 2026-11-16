@@ -1,0 +1,132 @@
+<div class="page-wrap checkout-page">
+  <div class="breadcrumbs">
+    <a routerLink="/">HOME</a><span>/</span><a routerLink="/cart">YOUR BAG</a><span>/</span>CHECKOUT
+  </div>
+  <div class="eyebrow">ALMOST THERE</div>
+  <h1>CHECKOUT <span>— SHIPPING</span></h1>
+  @if (complete()) {
+    <div class="success-panel">
+      <span>✓</span>
+      <h2>Order received. Let's get moving.</h2>
+      <p>
+        Your order <strong>{{ orderId() }}</strong> is confirmed. Track it anytime from your orders
+        page.
+      </p>
+      <a routerLink="/orders" class="button button-green">VIEW MY ORDERS ↙</a>
+    </div>
+  } @else {
+    <div class="checkout-layout">
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <section class="form-section">
+          <div class="form-heading">
+            <span>01</span>
+            <div>
+              <h2>CONTACT DETAILS</h2>
+              <p>Where should we send your order updates?</p>
+            </div>
+          </div>
+          <label
+            >Email address<input
+              formControlName="email"
+              type="email"
+              placeholder="you@example.com"
+            />
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+              <small>Enter a valid email address.</small>
+            }</label
+          ><label
+            >Phone number<input formControlName="phone" placeholder="01X XXXX XXXX" />
+            @if (form.controls.phone.touched && form.controls.phone.invalid) {
+              <small>Enter a valid phone number.</small>
+            }
+          </label>
+        </section>
+        <section class="form-section">
+          <div class="form-heading">
+            <span>02</span>
+            <div>
+              <h2>SHIPPING ADDRESS</h2>
+              <p>Tell us where your gear should go.</p>
+            </div>
+          </div>
+          <div class="form-two">
+            <label
+              >First name<input formControlName="firstName" placeholder="First name" />
+              @if (form.controls.firstName.touched && form.controls.firstName.invalid) {
+                <small>This field is required.</small>
+              }</label
+            ><label
+              >Last name<input formControlName="lastName" placeholder="Last name" />
+              @if (form.controls.lastName.touched && form.controls.lastName.invalid) {
+                <small>This field is required.</small>
+              }
+            </label>
+          </div>
+          <label
+            >Street address<input
+              formControlName="address"
+              placeholder="House number and street name"
+            />
+            @if (form.controls.address.touched && form.controls.address.invalid) {
+              <small>Please enter your street address.</small>
+            }
+          </label>
+          <div class="form-two">
+            <label
+              >City<input formControlName="city" placeholder="Cairo" />
+              @if (form.controls.city.touched && form.controls.city.invalid) {
+                <small>This field is required.</small>
+              }</label
+            ><label
+              >Governorate<select formControlName="governorate">
+                <option value="">Select governorate</option>
+                <option>Cairo</option>
+                <option>Giza</option>
+                <option>Alexandria</option>
+                <option>Other</option>
+              </select>
+              @if (form.controls.governorate.touched && form.controls.governorate.invalid) {
+                <small>Choose a governorate.</small>
+              }
+            </label>
+          </div>
+          <label
+            >Order notes <span class="optional">(optional)</span
+            ><textarea formControlName="notes" placeholder="Anything we should know?"></textarea>
+          </label>
+        </section>
+        <button class="button button-green full-button">PLACE ORDER <span>↙</span></button>
+      </form>
+      <aside class="order-summary">
+        <div class="eyebrow">YOUR ORDER</div>
+        @for (item of store.cart(); track item.product.id + item.size) {
+          <div class="checkout-item">
+            <img [src]="item.product.image" [alt]="item.product.name" />
+            <div>
+              <strong>{{ item.product.name }}</strong><small
+                >{{ item.color }} / {{ item.size }} · Qty {{ item.quantity }}</small
+              >
+            </div>
+            <span>EGP {{ item.product.price * item.quantity | number }}</span>
+          </div>
+        }
+        <div class="summary-line">
+          <span>Subtotal</span><span>EGP {{ store.subtotal() | number }}</span>
+        </div>
+        <div class="summary-line">
+          <span>Shipping</span><span>{{ store.subtotal() > 2000 ? 'FREE' : 'EGP 75' }}</span>
+        </div>
+        @if (store.discount()) {
+          <div class="summary-line discount">
+            <span>Discount</span><span>− EGP {{ store.discount() | number }}</span>
+          </div>
+        }
+        <div class="summary-total">
+          <span>TOTAL</span
+          ><strong>EGP {{ store.total() + (store.subtotal() > 2000 ? 0 : 75) | number }}</strong>
+        </div>
+        <div class="secure-note">⌑ SECURE CHECKOUT</div>
+      </aside>
+    </div>
+  }
+</div>

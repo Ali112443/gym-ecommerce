@@ -1,0 +1,57 @@
+<div class="auth-container">
+    <div class="auth-visual">
+        <div class="auth-image"></div>
+        <div class="auth-copy">
+            <div class="eyebrow">This is where the heroes emerge.</div>
+            <h2>SHOW UP. <br>KEEP <span>GOING.</span></h2>
+                  <p>Gear for the work you came to do.</p>
+
+        </div>
+    </div>
+     <div class="auth-form-wrap">
+    <a routerLink="/products" class="text-link">← BACK TO SHOPPING</a>
+    <div class="auth-form">
+      <div class="eyebrow">
+        {{ register() ? 'JOIN THE HOUSE' : 'WELCOME BACK' }}
+      </div>
+      <h1>{{ register() ? 'CREATE ACCOUNT.' : 'GOOD TO SEE YOU.' }}</h1>
+      <p>
+        {{
+          register()
+            ? 'Start your next chapter. Your training essentials are waiting.'
+            : 'Sign in to keep your training journey moving.'
+        }}
+      </p>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        @if (register()) {
+          <label>Full name<input formControlName="name" placeholder="Your name" /></label>
+        }
+        <label
+          >Email address<input
+            formControlName="email"
+            type="email"
+            placeholder="you@example.com" /></label
+        ><label
+          >Password<input
+            formControlName="password"
+            type="password"
+            placeholder="At least 6 characters"
+        /></label>
+        @if (error()) {
+          <p class="form-error">{{ error() }}</p>
+        }
+        <button class="button button-green full-button">
+          {{ register() ? 'CREATE ACCOUNT' : 'SIGN IN' }} <span>↙</span>
+        </button>
+      </form>
+      <div class="auth-switch">
+        {{ register() ? 'Already have an account?' : 'New around here?' }}
+        <button type="button" (click)="toggle()">
+          {{ register() ? 'Sign in' : 'Create an account' }}
+        </button>
+      </div>
+      <div class="auth-demo">DEMO MODE · ENTER ANY VALID EMAIL AND PASSWORD</div>
+    </div>
+  </div>
+</div>
+
