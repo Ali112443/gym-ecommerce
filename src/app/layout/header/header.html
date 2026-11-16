@@ -9,10 +9,16 @@
         routerLink="/products"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
-        >Shop</a
+        aria-label="Shop"
+        title="Shop"
+        ><mat-icon aria-hidden="true">storefront</mat-icon><span>Shop</span></a
       >
-      <a routerLink="/wishlist" routerLinkActive="active">Wishlist</a>
-      <a routerLink="/orders" routerLinkActive="active">Orders</a>
+      <a routerLink="/wishlist" routerLinkActive="active" aria-label="Wishlist" title="Wishlist">
+        <mat-icon aria-hidden="true">favorite</mat-icon><span>Wishlist</span>
+      </a>
+      <a routerLink="/orders" routerLinkActive="active" aria-label="Orders" title="Orders">
+        <mat-icon aria-hidden="true">receipt_long</mat-icon><span>Orders</span>
+      </a>
     </nav>
     <div class="header-actions">
       <a
@@ -20,7 +26,7 @@
         routerLink="/cart"
         aria-label="Shopping bag, {{ store.cartCount() }} items"
       >
-        <mat-icon aria-hidden="true">shopping_bag</mat-icon><span>Bag</span>
+        <mat-icon aria-hidden="true">shopping_bag</mat-icon><span class="cart-label">Bag</span>
         @if (store.cartCount()) {
           <b class="cart-count">{{ store.cartCount() }}</b>
         }
@@ -41,11 +47,20 @@
         }
       </button>
       <div class="account-actions">
-        <a class="sign-in-button" routerLink="/profile">Account</a>
+        <a
+          class="sign-in-button account-link"
+          routerLink="/profile"
+          aria-label="Account"
+          title="Account"
+        >
+          <mat-icon aria-hidden="true">person</mat-icon><span>Account</span>
+        </a>
         @if (!store.isLoggedIn()) {
-          <a class="sign-up-button" routerLink="/sign-in">Sign in</a>
+          <a class="sign-up-button" routerLink="/sign-in"><span>Sign in</span></a>
         } @else {
-          <button class="sign-up-button" type="button" (click)="store.logout()">Sign out</button>
+          <button class="sign-up-button" type="button" (click)="store.logout()">
+            <span>Sign out</span>
+          </button>
         }
       </div>
     </div>

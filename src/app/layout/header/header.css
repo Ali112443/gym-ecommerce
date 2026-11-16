@@ -91,6 +91,9 @@
   text-transform: uppercase;
   transition: color 180ms ease;
 }
+.primary-nav mat-icon {
+  display: none;
+}
 
 .primary-nav a::after {
   position: absolute;
@@ -229,69 +232,162 @@
 @media (max-width: 680px) {
   .site-toolbar,
   .toolbar-content {
-    min-height: 72px;
+    min-height: 60px;
   }
   .toolbar-content {
-    flex-wrap: wrap;
-    gap: 0;
-    padding: 0.65rem 0;
+    flex-wrap: nowrap;
+    gap: 0.45rem;
+    width: calc(100% - 1rem);
+    padding: 0.45rem 0;
   }
   .store-name {
-    margin-right: auto;
+    min-width: 0;
+    gap: 0.4rem;
+    margin-right: 0;
   }
   .brand-mark {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    border-radius: 9px 3px 9px 3px;
   }
   .brand-copy {
-    font-size: 0.82rem;
+    overflow: hidden;
+    font-size: 0.68rem;
+    letter-spacing: 0.035em;
+    white-space: nowrap;
   }
   .brand-copy small {
-    font-size: 0.45rem;
+    display: none;
   }
   .primary-nav {
-    order: 3;
-    width: 100%;
-    height: 38px;
+    align-self: auto;
+    width: auto;
+    height: auto;
     justify-content: center;
-    gap: 2rem;
+    gap: 0.15rem;
+    margin-left: auto;
   }
   .primary-nav a {
-    font-size: 0.65rem;
+    display: grid;
+    width: 32px;
+    height: 36px;
+    place-items: center;
+    border-radius: 8px;
+    font-size: 0;
+    letter-spacing: 0;
   }
   .primary-nav a::after {
-    bottom: -0.15rem;
+    display: none;
+  }
+  .primary-nav a mat-icon {
+    display: block;
+    width: 19px;
+    height: 19px;
+    font-size: 19px;
+  }
+  .primary-nav a.active {
+    background: rgba(111, 189, 196, 0.16);
+    color: #9bd4d8;
   }
   .header-actions {
-    gap: 0.4rem;
+    flex: 0 0 auto;
+    gap: 0.25rem;
   }
   .cart-link {
-    min-height: 38px;
-    padding: 0 0.65rem;
+    width: 34px;
+    min-height: 36px;
+    padding: 0;
+  }
+  .cart-link mat-icon {
+    width: 19px;
+    height: 19px;
+    font-size: 19px;
+  }
+  .cart-label {
+    display: none;
   }
   .theme-button {
-    width: 38px;
-    min-height: 38px;
+    width: 34px;
+    min-height: 36px;
+  }
+  .account-actions {
+    gap: 0.25rem;
   }
   .account-actions a,
   .account-actions button {
-    min-height: 38px;
-    padding: 0 0.75rem;
-    font-size: 0.72rem;
+    min-height: 36px;
+    padding: 0 0.65rem;
+    font-size: 0.66rem;
+  }
+  .account-actions .account-link {
+    width: 34px;
+    gap: 0;
+    padding: 0;
+    font-size: 0;
+  }
+  .account-actions .account-link span { display: none; }
+  .account-actions .account-link mat-icon {
+    display: block;
+    width: 19px;
+    height: 19px;
+    font-size: 19px;
   }
 }
 
 @media (max-width: 390px) {
   .toolbar-content {
-    width: calc(100% - 1.25rem);
+    gap: 0.3rem;
+  }
+  .brand-mark {
+    width: 29px;
+    height: 29px;
+    flex-basis: 29px;
   }
   .brand-copy {
-    font-size: 0.72rem;
-  }
-  .account-actions .sign-in-button {
-    display: none;
+    font-size: 0.61rem;
+    letter-spacing: 0.01em;
   }
   .primary-nav {
-    gap: 1.35rem;
+    gap: 0;
+  }
+  .primary-nav a {
+    width: 29px;
+  }
+  .header-actions {
+    gap: 0.12rem;
+  }
+  .cart-link,
+  .theme-button,
+  .account-actions .account-link {
+    width: 31px;
+    min-height: 34px;
+  }
+  .account-actions a,
+  .account-actions button {
+    min-height: 34px;
+    padding: 0 0.5rem;
+  }
+  .account-actions .account-link {
+    padding: 0;
+  }
+}
+
+@media (max-width: 340px) {
+  .brand-copy {
+    display: none;
+  }
+  .store-name {
+    gap: 0;
+  }
+  .toolbar-content {
+    width: calc(100% - 0.75rem);
+  }
+  .account-actions a,
+  .account-actions button {
+    padding: 0 0.4rem;
+  }
+  .account-actions .account-link {
+    padding: 0;
   }
 }
