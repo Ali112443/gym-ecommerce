@@ -28,6 +28,8 @@ private fb = inject(FormBuilder);
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       this.error.set('Please fill in all required fields correctly.');
+      this.store.login(this.form.value);
+this.router.navigate(['/']);
       return;
     }
     this.store.login(this.form.value);

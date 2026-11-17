@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Auth } from './auth/auth';
-
+import { authGuard } from './auth.guard';
 export const routes: Routes = [
   {
     path: '',
@@ -28,17 +28,21 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
+    canActivate: [authGuard],
     loadComponent: () => import('./checkout/checkout').then((module) => module.Checkout),
   },
   {
     path: 'profile',
+    canActivate: [authGuard],
     loadComponent: () => import('./pages/my-profile/my-profile').then((module) => module.default),
+  },
+  {
+    path: 'orders',
+    canActivate: [authGuard],
+    loadComponent: () => import('./orders/orders').then((module) => module.Orders),
   },
   { path: 'sign-in', component: Auth, data: { register: false } },
   { path: 'sign-up', component: Auth, data: { register: true } },
-  {
-    path: 'orders',
-    loadComponent: () => import('./orders/orders').then((module) => module.Orders),
-  },
+
   { path: '**', redirectTo: '' },
 ];
