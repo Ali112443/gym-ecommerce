@@ -148,17 +148,25 @@
   white-space: nowrap;
 }
 .remove-item {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  min-height: 32px;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid color-mix(in srgb, #d64f58 38%, var(--border));
+  border-radius: 4px;
+  background: color-mix(in srgb, #d64f58 10%, var(--surface));
+  color: color-mix(in srgb, #d64f58 88%, var(--text));
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   cursor: pointer;
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
 }
 .remove-item:hover {
-  color: #d64f58;
+  border-color: #d64f58;
+  background: #d64f58;
+  color: #fff;
 }
 .order-summary {
   position: sticky;

@@ -4,33 +4,8 @@
       <span class="brand-mark" aria-hidden="true">S</span>
       <span class="brand-copy">SPIDER<span>HOUSE</span><small>TRAINING EQUIPMENT</small></span>
     </a>
-    <nav class="primary-nav" aria-label="Main navigation">
-      <a
-        routerLink="/products"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        aria-label="Shop"
-        title="Shop"
-        ><mat-icon aria-hidden="true">storefront</mat-icon><span>Shop</span></a
-      >
-      <a routerLink="/wishlist" routerLinkActive="active" aria-label="Wishlist" title="Wishlist">
-        <mat-icon aria-hidden="true">favorite</mat-icon><span>Wishlist</span>
-      </a>
-      <a routerLink="/orders" routerLinkActive="active" aria-label="Orders" title="Orders">
-        <mat-icon aria-hidden="true">receipt_long</mat-icon><span>Orders</span>
-      </a>
-    </nav>
+
     <div class="header-actions">
-      <a
-        class="cart-link"
-        routerLink="/cart"
-        aria-label="Shopping bag, {{ store.cartCount() }} items"
-      >
-        <mat-icon aria-hidden="true">shopping_bag</mat-icon><span class="cart-label">Bag</span>
-        @if (store.cartCount()) {
-          <b class="cart-count">{{ store.cartCount() }}</b>
-        }
-      </a>
       <button
         class="theme-button"
         (click)="themeService.toggleTheme()"
@@ -46,23 +21,72 @@
           <mat-icon>dark_mode</mat-icon>
         }
       </button>
-      <div class="account-actions">
-        <a
-          class="sign-in-button account-link"
-          routerLink="/profile"
-          aria-label="Account"
-          title="Account"
-        >
-          <mat-icon aria-hidden="true">person</mat-icon><span>Account</span>
-        </a>
-        @if (!store.isLoggedIn()) {
-          <a class="sign-up-button" routerLink="/sign-in"><span>Sign in</span></a>
-        } @else {
-          <button class="sign-up-button" type="button" (click)="store.logout()">
-            <span>Sign out</span>
-          </button>
-        }
-      </div>
+
+      <button
+        class="menu-button"
+        type="button"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="site-menu"
+        [attr.aria-label]="menuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+      >
+        <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+      </button>
     </div>
   </div>
 </mat-toolbar>
+
+@if (menuOpen()) {
+  <button class="menu-overlay" type="button" aria-label="Close menu" (click)="closeMenu()"></button>
+  <aside class="menu-panel" id="site-menu" aria-label="Site navigation">
+    <div class="menu-heading">
+      <div>
+        <span class="menu-eyebrow">SPIDER HOUSE</span>
+        <h2>Where to?</h2>
+      </div>
+      <button class="menu-close" type="button" aria-label="Close menu" (click)="closeMenu()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu-links">
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>storefront</mat-icon><span>Shop collection</span
+        ><mat-icon class="link-arrow">arrow_outward</mat-icon>
+      </a>
+      <a routerLink="/wishlist" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>favorite_border</mat-icon><span>Wishlist</span
+        ><mat-icon class="link-arrow">arrow_outward</mat-icon>
+      </a>
+      <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>shopping_bag</mat-icon><span>Your bag</span>
+        @if (store.cartCount()) {
+          <b class="menu-count">{{ store.cartCount() }}</b>
+        }
+        <mat-icon class="link-arrow">arrow_outward</mat-icon>
+      </a>
+      <a routerLink="/orders" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>receipt_long</mat-icon><span>My orders</span
+        ><mat-icon class="link-arrow">arrow_outward</mat-icon>
+      </a>
+      <a routerLink="/profile" routerLinkActive="active" (click)="closeMenu()">
+        <mat-icon>person_outline</mat-icon><span>My account</span
+        ><mat-icon class="link-arrow">arrow_outward</mat-icon>
+      </a>
+    </nav>
+
+    <div class="menu-footer">
+      @if (store.isLoggedIn()) {
+        <button type="button" class="menu-auth" (click)="store.logout(); closeMenu()">
+          <mat-icon>logout</mat-icon><span>Sign out</span>
+        </button>
+      } @else {
+        <a class="menu-auth" routerLink="/sign-in" (click)="closeMenu()">
+          <mat-icon>login</mat-icon><span>Sign in to your account</span
+          ><mat-icon class="link-arrow">arrow_outward</mat-icon>
+        </a>
+      }
+      <p>BUILT FOR THE WORK YOU CAME TO DO.</p>
+    </div>
+  </aside>
+}
