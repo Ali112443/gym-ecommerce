@@ -58,13 +58,6 @@
         <mat-icon>favorite_border</mat-icon><span>Wishlist</span
         ><mat-icon class="link-arrow">arrow_outward</mat-icon>
       </a>
-      <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">
-        <mat-icon>shopping_bag</mat-icon><span>Your bag</span>
-        @if (store.cartCount()) {
-          <b class="menu-count">{{ store.cartCount() }}</b>
-        }
-        <mat-icon class="link-arrow">arrow_outward</mat-icon>
-      </a>
       <a routerLink="/orders" routerLinkActive="active" (click)="closeMenu()">
         <mat-icon>receipt_long</mat-icon><span>My orders</span
         ><mat-icon class="link-arrow">arrow_outward</mat-icon>
@@ -89,4 +82,19 @@
       <p>BUILT FOR THE WORK YOU CAME TO DO.</p>
     </div>
   </aside>
+}
+
+@if (!menuOpen()) {
+  <a
+    class="floating-cart"
+    [class.is-hidden]="!cartVisible()"
+    routerLink="/cart"
+    [attr.aria-label]="'Open cart with ' + store.cartCount() + ' items'"
+    title="Open cart"
+  >
+    <mat-icon aria-hidden="true">shopping_cart</mat-icon>
+    @if (store.cartCount()) {
+      <b class="floating-cart-count">{{ store.cartCount() }}</b>
+    }
+  </a>
 }

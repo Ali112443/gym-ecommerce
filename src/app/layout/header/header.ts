@@ -14,6 +14,8 @@ export class Header {
   readonly themeService = inject(ThemeService);
   readonly store = inject(StoreService);
   readonly menuOpen = signal(false);
+  readonly cartVisible = signal(true);
+  private previousScrollY = 0;
 
   toggleMenu() {
     this.menuOpen.update((open) => !open);
@@ -26,5 +28,19 @@ export class Header {
   @HostListener('document:keydown.escape')
   closeMenuOnEscape() {
     this.closeMenu();
+  }
+
+  @HostListener('window:scroll')
+  updateCartVisibility() {
+    const currentScrollY = window.scrollY;
+    const scrollDelta = currentScrollY - this.previousScrollY;
+
+    if (currentScrollY <= 24 || scrollDelta < -4) {
+      this.cartVisible.set(true);
+    } else if (scrollDelta > 4) {
+      this.cartVisible.set(false);
+    }
+
+    this.previousScrollY = currentScrollY;
   }
 }
