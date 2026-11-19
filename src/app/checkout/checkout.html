@@ -95,6 +95,50 @@
             ><textarea formControlName="notes" placeholder="Anything we should know?"></textarea>
           </label>
         </section>
+        <section class="form-section payment-section">
+          <div class="form-heading">
+            <span>03</span>
+            <div>
+              <h2>PAYMENT METHOD</h2>
+              <p>Choose where you’ll send your payment.</p>
+            </div>
+          </div>
+          <div class="payment-options" role="group" aria-label="Choose a payment method">
+            <button
+              class="payment-card"
+              [class.selected]="paymentMethod() === 'instapay'"
+              [attr.aria-pressed]="paymentMethod() === 'instapay'"
+              type="button"
+              (click)="paymentMethod.set('instapay')"
+            >
+              <span class="payment-card-top"
+                ><span class="payment-mark instapay-mark">IP</span
+                ><span class="payment-check"></span
+              ></span>
+              <strong>InstaPay</strong>
+              <small>Transfer to this number</small>
+              <b class="payment-number">01068727501</b>
+            </button>
+            <button
+              class="payment-card"
+              [class.selected]="paymentMethod() === 'vodafone-cash'"
+              [attr.aria-pressed]="paymentMethod() === 'vodafone-cash'"
+              type="button"
+              (click)="paymentMethod.set('vodafone-cash')"
+            >
+              <span class="payment-card-top"
+                ><span class="payment-mark vodafone-mark">VF</span
+                ><span class="payment-check"></span
+              ></span>
+              <strong>Vodafone Cash</strong>
+              <small>Transfer to this number</small>
+              <b class="payment-number">01068727501</b>
+            </button>
+          </div>
+          <p class="payment-note">
+            After placing your order, WhatsApp will open with your order details ready to send.
+          </p>
+        </section>
         <button class="button button-green full-button">PLACE ORDER <span>↙</span></button>
       </form>
       <aside class="order-summary">
@@ -103,9 +147,8 @@
           <div class="checkout-item">
             <img [src]="item.product.image" [alt]="item.product.name" />
             <div>
-              <strong>{{ item.product.name }}</strong><small
-                >{{ item.color }} / {{ item.size }} · Qty {{ item.quantity }}</small
-              >
+              <strong>{{ item.product.name }}</strong
+              ><small>{{ item.color }} / {{ item.size }} · Qty {{ item.quantity }}</small>
             </div>
             <span>EGP {{ item.product.price * item.quantity | number }}</span>
           </div>
