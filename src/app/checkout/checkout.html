@@ -9,10 +9,17 @@
       <span>✓</span>
       <h2>Order received. Let's get moving.</h2>
       <p>
-        Your order <strong>{{ orderId() }}</strong> is confirmed. Track it anytime from your orders
-        page.
+        Your order number is <strong class="confirmed-order-id">{{ orderId() }}</strong
+        >. Your order is saved. Send its details on WhatsApp to confirm it.
       </p>
-      <a routerLink="/orders" class="button button-green">VIEW MY ORDERS ↙</a>
+      <a
+        [href]="whatsappLink()"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button button-green whatsapp-button"
+        >SEND ON WHATSAPP <span>↗</span></a
+      >
+      <a routerLink="/orders" class="orders-button">VIEW MY ORDERS ↙</a>
     </div>
   } @else {
     <div class="checkout-layout">

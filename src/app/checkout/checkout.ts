@@ -18,6 +18,7 @@ export class Checkout {
   readonly store = inject(StoreService);
   readonly complete = signal(false);
   readonly orderId = signal('');
+  readonly whatsappLink = signal('');
   readonly form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required, Validators.pattern(/^[+\d][\d\s-]{7,15}$/)]],
@@ -40,7 +41,7 @@ export class Checkout {
     const checkoutDetails = {
       ...this.form.getRawValue(),
       paymentMethod: this.paymentMethod(),
-      paymentNumber: '01068727501',
+      paymentNumber: '201068727501',
     };
     const orderMessage = this.buildWhatsAppMessage(checkoutDetails);
     const order = this.store.placeOrder(checkoutDetails);
@@ -52,7 +53,7 @@ export class Checkout {
     this.orderId.set(order.id);
     this.complete.set(true);
     const whatsappMessage = `Order number: ${order.id}\n${orderMessage}`;
-    window.location.assign(
+    this.whatsappLink.set(
       `https://wa.me/${Checkout.WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`,
     );
   }
@@ -74,7 +75,7 @@ export class Checkout {
       `Email: ${details.email}`,
       `Address: ${details.address}, ${details.city}, ${details.governorate}`,
       `Payment: ${paymentName}`,
-      `Transfer number: 01068727501`,
+      `Transfer number: 201068727501`,
       'Items:',
       products,
       `Total: EGP ${this.store.grandTotal()}`,
